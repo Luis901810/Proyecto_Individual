@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     Image:{
-      type : DataTypes.TEXT(1024),
+      type : DataTypes.STRING,
       allowNull: false
 
     },
@@ -24,10 +24,14 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     NiveldeComidaSaludable:{
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM("health score"),
       allowNull: false,
 
     },
+    Pasoapaso:{
+      type: DataTypes.STRING,
+      allowNull: false
+    }
 
 
   }, { timestamps: false });
