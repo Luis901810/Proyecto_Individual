@@ -1,8 +1,8 @@
 const axios  = require("axios");
 require("dotenv").config()
-const { YOUR_API_KEY } = process.env;
+const { YOUR_API_KEY, URLAPI } = process.env;
 
-const URLAPI ="https://api.spoonacular.com/recipes"
+
 
 const getRecetasById = async (req, res) =>{
     try {
@@ -11,11 +11,10 @@ const getRecetasById = async (req, res) =>{
             return res.status(401).json({error: `el id: ${id} debe ser numero entero valido`})
 
         }
-        const { data} = await axios.get(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}`)
+        const { data} = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}`)
         const {title, image, imageType} =data
         if(!title) throw Error("No hay recetas con ese nombre con el ID:" + id)
        
-        
         const Receta ={
             id,
             title,

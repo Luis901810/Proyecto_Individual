@@ -1,13 +1,13 @@
-const getRecetasById = require("../controllers/getRecipes");
+// Importar todos los routers;
 
 const router = require("express").Router();
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const getRecetasById = require("../controllers/getRecipesById");
+const getRecipeName = require("../controllers/getRecipeName");
+
 
 // Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-router.get("/recipes/:id", getRecetasById)
-router.get("/recipes/name?=");
+router.get("/recipes/name", getRecipeName);
+router.get("/recipes/:id", getRecetasById);
 router.post("/recipes")
 router.get("/diets")
 
