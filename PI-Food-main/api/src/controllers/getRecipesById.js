@@ -11,7 +11,7 @@ const getRecetasById = async (req, res) =>{
             return res.status(401).json({error: `el id: ${id} debe ser numero entero valido`})
 
         }
-        const { data} = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}`)
+        const { data} = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}&addRecipeInformation=true`)
         const {title, image, imageType} =data
         if(!title) throw Error("No hay recetas con ese nombre con el ID:" + id)
        
