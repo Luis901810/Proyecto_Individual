@@ -10,9 +10,13 @@ module.exports = (sequelize) =>{
             autoIncrement: true,
            
         },
-        Nombre:{
+       name:{
             type :DataTypes.STRING,
-            allownulls:false
+            allownulls:false,
+            unique: true,
+            set(value){
+                this.setDataValue("name", value.tolowerCase())
+            }
         }
     },{timestamps: false})
 }

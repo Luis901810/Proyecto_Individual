@@ -1,6 +1,6 @@
 const { Recipe } = require("../db");
 
-const newData = async({id, title, image, summary, healthScore,instructions,ingredients,equipment,dietId}) =>{
+const newData = async({id, title, image, summary, healthScore,instructions,dietId}) =>{
     try {
         if(title === undefined || image === undefined || summary === undefined || healthScore === undefined || instructions === undefined){
            throw Error(" Faltan datos ") 
@@ -9,6 +9,7 @@ const newData = async({id, title, image, summary, healthScore,instructions,ingre
             id,
             title,
             image,
+            healthScore,
             summary,
             instructions
         });

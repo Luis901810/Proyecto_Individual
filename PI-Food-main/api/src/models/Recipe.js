@@ -5,34 +5,30 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('recipe', {
     id:{
-      type:DataTypes.INTEGER,
-      primaryKey:true,
-      autoIncrement: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    Nombre: {
+
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    Image:{
-      type : DataTypes.STRING,
-      allowNull: false
+      set(value){
+        this.setDataValue("title",value.toLowerCase())
+      }},
 
-    },
+    image:{type: DataTypes.STRING,
+      allowNull: false},
 
-    Resumendelplato:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    NiveldeComidaSaludable:{
-      type: DataTypes.ENUM("health score"),
-      allowNull: false,
+    healthScore:{type: DataTypes.INTEGER,
+      allowNull: false},
 
-    },
-    Pasoapaso:{
-      type: DataTypes.STRING,
-      allowNull: false
-    }
+    summary:{type: DataTypes.STRING,
+      allowNull: false},
 
+    instructions:{type: DataTypes.STRING,
+      allowNull: false},   
 
-  }, { timestamps: false });
+  },{timestamps:false});
 };
+
