@@ -1,37 +1,46 @@
-const axios  = require("axios");
-require("dotenv").config()
-const { YOUR_API_KEY, URLAPI } = process.env;
+const infApi = require("../handlers/handler.RecipeId");
 
 
-
-const getRecetasById = async (req, res) =>{
+const getRecetasById = async (req, res) => {
     try {
         const { id } = req.params;
-        if(!Number.isInteger(Number(id))){
-            return res.status(401).json({error: `el id: ${id} debe ser numero entero valido`})
 
+        if (!Number.isInteger(Number(id))) {
+            return res.status(400).json({ error: `el id: ${id} debe ser numero entero valido` });
         }
-        const { data} = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}&addRecipeInformation=true`)
-        const {title, image, healthScore,summary,instructions } =data
-        if(!title) throw Error("No hay recetas con ese nombre con el ID:" + id)
-       
-        const Receta ={
+
+        const data = await infApi(id);
+
+        if (!data) {
+            const errorMessage = `No se encontro ninguna receta con ese ID: ${id}`
+            return res.status(404).json({error: errorMessage})
+        }
+        const { title, image, healthScore, summary, instructions } = data;
+
+        const recipeDetails = {
             id,
             title,
             image,
             healthScore,
             summary,
-            instructions
-        }
-    
-    return res.status(200).json(Receta)
-         
+            instructions,
+        };
+
+        return res.status(200).json(recipeDetails);
     } catch (error) {
-    return error.message.includes("id")
-    ?res.status(404).send(error.message)
-    :res.status(500).json({error: error.message})
+        let errorMessage = "Ocurrio un error en el servidor. Por favor intentar mas tarde"
         
+
+        if(errorMessage.includes("id")){
+            errorMessage= "no se encontro la receta solicitada con ese ID";
+           
+            return res.status(404).json({error: errorMessage})
+        } else{
+            
+            return res.status(500).json({error: errorMessage})
+        }
+       
     }
-   
-}
-module.exports = getRecetasById;
+}  
+
+module.exports =  getRecetasById ;

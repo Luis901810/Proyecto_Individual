@@ -13,8 +13,6 @@ const deleteData = async(id) =>{
         throw new Error(`Error al eliminar el registro ${error.message}`)
         
     }
-
-   
 };
 
 module.exports = deleteData
