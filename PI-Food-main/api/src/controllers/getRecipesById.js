@@ -1,4 +1,4 @@
-const infApi = require("../handlers/handler.RecipeId");
+const infApi = require("../handlers/handlerRecipeId");
 
 
 const getRecetasById = async (req, res) => {

@@ -3,7 +3,7 @@ const { Recipe } = require("../db");
 const newData = async({id, title, image, summary, healthScore,instructions,dietId}) =>{
     try {
         if(title === undefined || image === undefined || summary === undefined || healthScore === undefined || instructions === undefined){
-           throw Error(" Faltan datos ") 
+           throw new Error(" Faltan datos ") 
         }
         let newRecipe = await Recipe.create({
             id,
