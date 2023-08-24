@@ -4,15 +4,15 @@ const router = require("express").Router();
 
 const getRecipeName = require("../controllers/getRecipeName");
 const getRecipesById= require("../controllers/getRecipesById");
-const createRecipe = require("../controllers/createRecipe")
+const postCreateRecipe = require("../controllers/postCreateRecipe")
 
 // Configurar los routers
 
 router.get("/recipes/name", getRecipeName);
 router.get("/recipes/:id", getRecipesById);
-router.post("/createrecipe", createRecipe)
+router.post("/createrecipe", postCreateRecipe)
 
 router.post("/recipes")
-router.get("/diets")
+router.get("/diets,")
 
 module.exports = router;

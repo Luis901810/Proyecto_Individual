@@ -1,15 +1,31 @@
-const newData = require("../controllers/createRecipe")
 
-const createRecipe = async(req, res) =>{
 
+const { Recipe } = require("../db");
+
+const newData = async({id, title, image, summary, healthScore,instructions,dietId}) =>{
     try {
+        if(title === undefined || image === undefined || summary === undefined || healthScore === undefined || instructions === undefined){
+           throw new Error(" Faltan datos ") 
+        }
+        let newRecipe = await Recipe.create({
+            id,
+            title,
+            image,
+            healthScore,
+            summary,
+            instructions
+        });
 
-        const newRecipe = await newData(req.body)
-        return res.status(200).json(newRecipe);
+        if(dietId){
+             await newRecipe.setDiets(dietId)
+
+        }
+       
+       return {success: true, message:"Receta creada Exitosamente"}
         
     } catch (error) {
-        return res.status(500).json({error: error.message})
+        return {success: false, error: error.message}
         
     }
 }
-module.exports=  createRecipe;
+module.exports=newData;

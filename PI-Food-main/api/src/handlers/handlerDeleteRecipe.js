@@ -1,18 +1,20 @@
-const deleteData = require("../controllers/deleteRecipe");
 
-const deleteRecipe = async( req, res) =>{
+
+const { Recipe } = require("../db");
+
+const deleteData = async(id) =>{
+
     try {
-        const { id } = req.params
-        if (!parseInt(id)) {
-            return res.status(400).json({ error: "ID de receta no válido" });
-        }
-        await deleteData(id)
-        return res.status(200).json({message: "La Receta se elimino con exito.", id})
+        const deleteRecipe= await Recipe.destroy({
+            where:{id}
+        })
+       
+        return {success: deleteRecipe, message:"Recipe eliminado con exito"}
         
     } catch (error) {
-        return res.status(404).json({error: error.message})
+        throw new Error(`Error al eliminar el registro ${error.message}`)
         
     }
-}
+};
 
-module.exports=  deleteRecipe;
+module.exports = deleteData
