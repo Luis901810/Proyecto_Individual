@@ -1,7 +1,7 @@
-const { typesDietsFuntion } = require('../controllers/typesDiets');
+const  typesDietsFuntion  = require("../handlers/handlerDiets");
 const {Diets} = require('../db')
 
-const typeDiets = async(req,res)=>{
+const typeDiets = async(req, res)=>{
     try {
 
         // ********************   LLAMAMOS LAS DIETAS DE LA BD   ******************** 
@@ -9,7 +9,7 @@ const typeDiets = async(req,res)=>{
         
       
         if (diet.length === 0){
-            const arrayDiets = await typesDietsFuntion() // llamamos a la función
+            const arrayDiets = await typesDietsFuntion() 
             arrayDiets.forEach(async(ele)=>{
                 await Diets.create({
                     name:ele
@@ -26,4 +26,4 @@ const typeDiets = async(req,res)=>{
     }
  }
 
- module.exports={typeDiets}
+ module.exports= typeDiets
