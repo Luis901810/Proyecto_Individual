@@ -1,33 +1,55 @@
-
-const axios = require("axios");
-require("dotenv").config();
-
+const axios = require('axios');
+require('dotenv').config();
 const { YOUR_API_KEY, URLAPI } = process.env;
+const { Recipe, Diets } = require("../db");
 
-const infApi = async (id) => {
+const extractRecipeData = (data) => {
+    const instructions = data.analyzedInstructions[0]?.steps.map(ele => ele.step) || [];
+    const ingredients = data.analyzedInstructions[0]?.steps.flatMap(ele => ele.ingredients.map(ele => ele.name)) || [];
+    const equipment = data.analyzedInstructions[0]?.steps.flatMap(ele => ele.equipment.map(ele => ele.name)) || [];
+
+    return {
+        id: data.id,
+        title: data.title,
+        image: data.image,
+        healthScore: data.healthScore,
+        summary: data.summary.replace(/<[^>]+>/g, ''),
+        instructions,
+        ingredients,
+        equipment,
+        diets: data.diets || []
+    };
+};
+
+const dataApiDB = async (id) => {
     try {
-        const response = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}&addRecipeInformation=true`);
-        if(response.status !== 200){
-            const error= new Error(`Error en la solicitud a la Api. con codigo de estado: ${response.status}`)
-            response= error.response;
-            return error;
-        }
-        
-        return response.data;
-    } catch (error) {
-        if (error.response) {
-        
-            if (error.response.status === 404) {
-                throw new Error(`No se encontro la receta con el ID: ${id} `);
+        if (id) {
+            const response = await Recipe.findByPk(id, {
+                include: {
+                    model: Diets,
+                    attributes: ["name"]
+                }
+            });
+
+            if (response?.dataValues?.title) {
+                return extractRecipeData(response.dataValues);
             } else {
-                throw new Error("Error al hacer la solicitud a la API.");
+                throw new Error("La receta no se encontró en la base de datos.");
             }
         } else {
-            throw new Error("Error inesperado. Por favor, intenta de nuevo más tarde.");
+            const responseApi = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}&addRecipeInformation=true`);
+            const responseApiData = responseApi?.data;
+
+            if (responseApiData?.title) {
+                return extractRecipeData(responseApiData);
+            } else {
+                throw new Error("La receta no se encontró en la API externa.");
+            }
         }
+    } catch (error) {
+        console.error("Error:", error.message);
+        return null;
     }
 };
 
-module.exports = infApi;
-
-
+module.exports = dataApiDB;
