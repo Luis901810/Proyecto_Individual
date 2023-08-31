@@ -1,9 +1,8 @@
 
-
 import { useNavigate } from 'react-router-dom'
-import './homePage.css'
 
-const HomeCard = ({recipesAll})=>{
+
+const Card = ({recipesAll})=>{
     const navigate = useNavigate()
 
     return(
@@ -33,4 +32,4 @@ const HomeCard = ({recipesAll})=>{
     )
 }
 
-export default HomeCard;
+export default Card;

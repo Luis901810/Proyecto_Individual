@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import styles from "./landing.module.css"
 
-const Landing = () =>{
+const Loading = () =>{
 
     const navigate = useNavigate();
     return (
@@ -15,4 +15,4 @@ const Landing = () =>{
         </div>
     );
 }
-export default Landing;
+export default Loading;

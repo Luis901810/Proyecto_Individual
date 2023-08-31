@@ -4,10 +4,10 @@ import { GET_RECIPE_ALL, GET_RECIPE_NAME,
          RESET_RECIPE_ID, ADD_TYPE_DIET,
          UPWARD_OR_FALLING_TITLE,FILTER_FOR_DIET, FILTER_HEALTH_SCORE, 
          FILTER_FOR_STORAGE, LOADING } from "./actions_types";
-const URL= "http://localhost:3001/recipe";
-const URLNAME= "http://localhost:3001/recipe?name";
+const URL= "http://localhost:3001/recipes";
+const URLNAME= "http://localhost:3001/recipes?name";
 const URLDIET = "http://localhost:3001/diets"
-const URLCREATE = "http://localhost:3001/createRecipe"
+const URLCREATE = "http://localhost:3001/createRecipes"
 
 
 export const loading=(stateLoading)=>{
@@ -25,10 +25,11 @@ export const recipeAll = () =>{
             return async function(dispatch){
                 try {
                     dispatch(loading(true))
-                    const { data } = await axios(`${URL}`)
+                    const response = await axios(`${URL}`)
+                    
                     return dispatch({
                         type: GET_RECIPE_ALL,
-                        payload: data
+                        payload: response.data
                     })
                     
                 } catch (error) {
@@ -94,7 +95,7 @@ export const resetRecipeId = () =>{
 
 // agregar tipos de dietas
 
-export const addTypeDiet = () =>{
+export const addTypeRecipe = () =>{
     return async function(dispatch){
         try {
             let { data } = await axios(`${URLDIET}`)
@@ -128,9 +129,6 @@ export const createRecipe = (input) =>{
     }
 }
 
-// filtros
-
-// ordenar por id 
 
 export const  upwardOrfalling = (order) =>{
     return {

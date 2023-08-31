@@ -1,7 +1,7 @@
 import {useState } from "react"
 import { useDispatch } from "react-redux"
 import { recipeAll } from "../../redux/action"
-i
+
 const Search = ({setPage, setIndex})=>{
 
     //-------capturamos el valor del input
@@ -14,7 +14,7 @@ const Search = ({setPage, setIndex})=>{
 
     //------buscamos por el nombre
     const onSearch=(name)=> {
-        if(!name) return alert("Debe de ingresar una descripción")
+        if(!name) return alert("Debe de ingresar un Nombre")
         dispatch(recipeAll(name))
         
         // cuando buscamos por nombre seteamos el page y el index con los respectivos valores

@@ -25,6 +25,7 @@ const dataApiDB = async (id) => {
     try {
         if (id) {
             const response = await Recipe.findByPk(id, {
+               
                 include: {
                     model: Diets,
                     attributes: ["name"]
@@ -32,12 +33,20 @@ const dataApiDB = async (id) => {
             });
 
             if (response?.dataValues?.title) {
+                
                 return extractRecipeData(response.dataValues);
-            } else {
-                throw new Error("La receta no se encontró en la base de datos.");
-            }
-        } else {
-            const responseApi = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}&addRecipeInformation=true`);
+                }
+            // } else {
+                
+            //     throw new Error("La receta no se encontró en la base de datos.");
+            // }
+           
+        } 
+    
+
+
+        const responseApi = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}&addRecipeInformation=true`);
+          console.log(responseApi)
             const responseApiData = responseApi?.data;
 
             if (responseApiData?.title) {
@@ -45,7 +54,7 @@ const dataApiDB = async (id) => {
             } else {
                 throw new Error("La receta no se encontró en la API externa.");
             }
-        }
+        
     } catch (error) {
         console.error("Error:", error.message);
         return null;
