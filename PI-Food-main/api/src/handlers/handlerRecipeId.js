@@ -45,7 +45,7 @@ const dataApiDB = async (id) => {
     
 
 
-        const responseApi = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}&addRecipeInformation=true`);
+        const responseApi = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=10`);
           console.log(responseApi)
             const responseApiData = responseApi?.data;
 

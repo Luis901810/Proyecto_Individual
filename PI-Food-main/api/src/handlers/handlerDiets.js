@@ -4,7 +4,7 @@ const { YOUR_API_KEY, URLAPI } = process.env;
 
 const typesDietsFuntion = async() =>{
     try {
-        const { data } = await axios(`${URLAPI}/complexSearch/?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`)
+        const { data } = await axios(`${URLAPI}/complexSearch/?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=10`)
         const recipes = data.results;
 
         const uniqueDiets =  new Set();

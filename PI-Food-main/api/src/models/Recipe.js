@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('recipe', {
     id:{
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
 
     title: {
@@ -17,17 +17,25 @@ module.exports = (sequelize) => {
         this.setDataValue("title",value.toLowerCase())
       }},
 
-    image:{type: DataTypes.STRING,
-      allowNull: false},
+    image:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
 
-    healthScore:{type: DataTypes.INTEGER,
-      allowNull: false},
+    healthScore:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
 
-    summary:{type: DataTypes.STRING,
-      allowNull: false},
+    summary:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
 
-    instructions:{type: DataTypes.STRING,
-      allowNull: false},   
+    instructions:{
+      type: DataTypes.TEXT,
+      allowNull: true
+    },   
 
   },{timestamps:false});
 };

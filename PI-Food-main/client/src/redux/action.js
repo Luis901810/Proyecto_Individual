@@ -4,19 +4,14 @@ import { GET_RECIPE_ALL, GET_RECIPE_NAME,
          RESET_RECIPE_ID, ADD_TYPE_DIET,
          UPWARD_OR_FALLING_TITLE,FILTER_FOR_DIET, FILTER_HEALTH_SCORE, 
          FILTER_FOR_STORAGE, LOADING } from "./actions_types";
-const URL= "http://localhost:3001/recipes";
+
 const URLNAME= "http://localhost:3001/recipes?name";
 const URLDIET = "http://localhost:3001/diets"
-const URLCREATE = "http://localhost:3001/createRecipes"
+const URLCREATE = "http://localhost:3001/createrecipes"
+const URL= "http://localhost:3001/recipes";
 
 
-export const loading=(stateLoading)=>{
 
-    return {
-        type:LOADING,
-        payload:stateLoading}
-
-}
    
 
                     // todos los recipes     
@@ -34,8 +29,7 @@ export const recipeAll = () =>{
                     
                 } catch (error) {
                     throw new Error(`Error al cargar las Recetas: ${error.message}`)
-                    
-                }finally{
+                 }finally{
                     dispatch(loading(false))
                 }
             }
@@ -45,7 +39,7 @@ export const recipeAll = () =>{
 export const recipeName = (name) =>{
     return  async function(dispatch){
         try {
-            dispatch(loading(true))
+           dispatch(loading(true))
             let { data } = await axios(`${URLNAME}=${name}`)
             
             return dispatch({
@@ -55,9 +49,9 @@ export const recipeName = (name) =>{
             
         } catch (error) {
             throw new Error(`Error al encontrar recetas por nombre: ${error.message}`)
-            
-        }finally{
-            dispatch(loading(false))
+        }
+        finally{
+             dispatch(loading(false))
         }
 
     }
@@ -68,17 +62,17 @@ export const recipeName = (name) =>{
 export const recipeId = (id) =>{
     return   async function(dispatch){
         try {
-            dispatch(loading(true))
-            const { data } =  await axios(`${URL}/${id}`)
+           dispatch(loading(true))
+            let response =  await axios(`${URL}/${id}`)
 
             return dispatch({
                 type: RECIPE_ID,
-                payload :data
+                payload :response.data
             })
 
         } catch (error) {
-            throw new Error(`error al buscar recipes por ID: ${error.message}`)
-            
+            throw new Error(`error al buscar recetas por ID: ${error.message}`)
+         
         }finally{
             dispatch(loading(false))
         }
@@ -117,7 +111,7 @@ export const createRecipe = (input) =>{
     return async (dispatch) => {
         try {
 
-            const { data } = await axios(`${URLCREATE}`, input)
+            const { data } = await axios.post(`${URLCREATE}`, input)
             return dispatch({
                 type: CREATE_RECIPE,
                 payload: data
@@ -162,7 +156,7 @@ export const  upwardOrfalling = (order) =>{
     }
  }
 
- // puntuacion de salud
+
 
  export const filterHealthScore = (healthscore) =>{
     return {
@@ -170,3 +164,11 @@ export const  upwardOrfalling = (order) =>{
         payload: healthscore
     }
  }
+
+export const loading=(stateLoading)=>{
+
+    return {
+        type:LOADING,
+        payload:stateLoading}
+
+}

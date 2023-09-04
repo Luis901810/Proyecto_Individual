@@ -6,7 +6,7 @@ const { Recipe, Diets } = require("../db");
 const recipesApi = async () => {
     try
     {
-        const resAxios = await axios(`${URLAPI}/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`);
+        const resAxios = await axios(`${URLAPI}/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=10`);
         const { results } = resAxios.data ;
     
         
@@ -14,6 +14,7 @@ const recipesApi = async () => {
 
             let response = await results?.map((result) => {
                 return {
+                    
                     idApi: result.id, 
                     title: result.title,
                     image: result.image, 
@@ -53,6 +54,7 @@ const DBInfo = async () => {
         })
     let response = await dataDB?.map(recipe => {
         return {
+
                      id: recipe.id,
                      name: recipe.name,
                      summary: recipe.summary,
@@ -71,13 +73,3 @@ const DBInfo = async () => {
 
 
 
-// const getAllInfo = async () => {
-//         try{
-//             const apiInfo = await getApiInfo();
-//             const bdInfo = await getDBInfo();
-//             const infoTotal = apiInfo.concat(bdInfo);
-//             return infoTotal;
-//         }catch (error) {
-//             console.error(error);
-//         }
-//      }

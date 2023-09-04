@@ -17,8 +17,6 @@ function App() {
         <Route path='/' element={<Landing/>}></Route>
         <Route path='/home' element={<Home/>}></Route>
         <Route path='/detail/:id' element={<DetailRecipe/>}></Route>
-        
-
         <Route path='/form' element={<Form/>}></Route>
           
       </Routes>

@@ -3,7 +3,7 @@ const newData = require("../handlers/handlerCreateRecipe")
 const createRecipe = async(req, res) =>{
 
     try {
-
+       
         const newRecipe = await newData(req.body)
         return res.status(200).json(newRecipe);
         

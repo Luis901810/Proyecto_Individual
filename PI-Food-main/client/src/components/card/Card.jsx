@@ -1,35 +1,35 @@
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import styles from "./card.module.css";
 
 
-const Card = ({recipesAll})=>{
+const Card = ({id, title, image, diets, healthScore })=>{
+   
     const navigate = useNavigate()
 
     return(
-        <div className="conteiner-car">
-            {recipesAll.map(({id,title,image,diets,healthScore})=>{
-            return(
-                <div key={id} className='cards'>
-                <div  className='car-detail'>
-                    <h2 id='title-card'>{title}</h2>
-                    <img  id='image-card' onClick={()=>navigate(`/detail/${id}`)} src={image} alt={title} />
-                        
-                    <h3 id='diet-title-card'>Tipos deDietas</h3>
-                    <h4 id='diet-card' >{diets?.map((ele,index)=>(
-                                           <div key={index}>
-                                            <li>{ele}</li>
-                                            </div>)
-                                        )}
-                    </h4>
+        <div >
+        
+            <h4 className= {styles.cards}>{id}</h4>         
+            <div  className= {styles.car_detail}>
+            <h2 className={styles.title_card}>{title}</h2>
+            <img  className= {styles.image_card} onClick={()=> navigate(`/detail/${id}`)} src={image} alt={title} />          
+            <h3 className={styles.diet_title_card}>Tipos de Dietas</h3>
+            <ul className={styles.diet_card}>
+                {
+                diets?.map((ele, index)=>(
+                
+                    <li key={`${id}-diet-${index}`}>{ele}</li>)
+                )}
+            </ul>
           
-                    <h3>{healthScore}</h3>
+            <h3>{healthScore}</h3>
 
-                </div>
-            </div>
-                        
-)})}
+        </div>
     </div>
-    )
-}
+    );
+};
+                        
+
 
 export default Card;

@@ -6,7 +6,7 @@ const { Recipe, Diets } = require('../db');
 const { Op } = require("sequelize");
 
 const dataApi = async (name) => {
-    const response = await axios(`${URLAPI}/complexSearch/?apiKey=${YOUR_API_KEY}&query=${name}&number=100&addRecipeInformation=true`);
+    const response = await axios(`${URLAPI}/complexSearch/?apiKey=${YOUR_API_KEY}&query=${name}&addRecipeInformation=true&number=10`);
     return response.data.results;
 };
 

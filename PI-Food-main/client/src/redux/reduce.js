@@ -35,6 +35,7 @@ const reducer = (state = initialState, action) => {
 
         case GET_RECIPE_NAME:
             return updateRecipeState(state, action.payload);
+            
 
         case RECIPE_ID:
             return {
@@ -47,12 +48,16 @@ const reducer = (state = initialState, action) => {
             return { ...state, recipeDetail: {} };
 
         case ADD_TYPE_DIET:
-            return { ...state, typesDiets: action.payload };
+            return { ...state,
+                 typesDiets: action.payload };
 
         case CREATE_RECIPE:
             return {
                  ...state,
-                  createRecipe: [...state.createRecipe, action.payload] };
+                  createRecipe: [
+                    ...state.createRecipe, 
+                    action.payload] };
+                    
         case UPWARD_OR_FALLING_TITLE: {
              if (action.payload === 'A-Z') {
                  const filterNameA = state.recipeFilter.sort((a, b) => a.title.localeCompare(b.title));

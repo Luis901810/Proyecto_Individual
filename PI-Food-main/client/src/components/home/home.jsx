@@ -2,57 +2,57 @@ import { useDispatch, useSelector } from "react-redux";
 import {recipeAll, addTypeRecipe, filterForStorage,  upwardOrfalling,upwardOrfallingTitle,filterForDiet, filterHealthScore} from "../../redux/action";
 import { useEffect, useState } from "react";
 import Nav from "../nav/Nav"
-import Card from "../card/Card"
+import Cards from "../cards/Cards";
 import Paginado from '../paginado/paginado';
 import Loading from '../landing/Landing';
+import styles from "./home.module.css"
 
 
 const Home = () => {
 
 
     const dispatch = useDispatch();
-     //-------------------   LOADING   -------------------//
+     
      const loading=useSelector(state=>state.loading)
-    //-------------------             -------------------//
-
-
      const recipesAll = useSelector(state => state.recipe);
      const recipeFilter = useSelector(state => state.recipeFilter);
+     const typeDiet = useSelector( state => state.typesDiets)
      const numberOfRecets=recipeFilter.length
-     console.log(numberOfRecets)
+     const [index,setIndex]=useState(0) 
+     const [recipeForPage] = useState(10)
+     const [page,setPage] = useState(1) 
+     const inicio = (page - 1) * recipeForPage;
+     const final = inicio + recipeForPage;
+     const card = recipeFilter.slice(inicio, final);
+     
 
 
-     //-------------------   PAGINADO   -------------------//
-
-    const [index,setIndex]=useState(0) // se crea este estado dentro de "HomePage" con la finalidad de pasarlo por props al componente "Nav" y utilizarlo, pero el uso principal de este hook es en el componente "Paginado"
-    
-    const [recipeForPage] = useState(10)
-    const [page,setPage] = useState(1) 
-  
-    const inicio = (page - 1) * recipeForPage;
-  
-    const final = inicio + recipeForPage;
-  
-    const cards = recipeFilter.slice(inicio, final);
-
-    //-------------------             -------------------//
         
 
 
      //-------------------   CARGAMOS LOS ESTADOS CON LAS RECETAAS   -------------------//
     useEffect(()=>{
-        !recipeFilter.length && dispatch(recipeAll())
-        recipeFilter.length !== recipesAll.length && dispatch(filterForStorage())
-    },[dispatch, recipeFilter.length, recipesAll.length])
+
+        if(!recipeFilter.length) {
+            dispatch(recipeAll())
+        }
+        if(recipeFilter.length !== recipesAll.length){
+            dispatch(filterForStorage())
+        }
+         
+    },[dispatch, recipesAll.length, recipeFilter.length])
+
+    useEffect(() =>{
+        dispatch(addTypeRecipe())
+    },[dispatch])
 
 
-                //-------------------   FILTROS   -------------------//
-        //-------------------   ID   -------------------//
+         
     const handleOrder=(event)=>{
         dispatch(upwardOrfalling(event.target.value))
     }
 
-     //-------------------   TITULO   -------------------//
+    
 
     const handleOrdertitle=(event)=>{
         dispatch(upwardOrfallingTitle(event.target.value))
@@ -65,15 +65,9 @@ const Home = () => {
     }
 
     //-------------------   TIPO DE DIETA   -------------------//
-        //.......cargamos y traemos las dietas
-        useEffect(()=>{
-
-            dispatch(addTypeRecipe())
-        },[dispatch])
+       
+       
         
-        const typeDiet = useSelector((state)=>state.typesDiets)
-      
-
         const handleFilterDiets =(event)=>{
             dispatch(filterForDiet(event.target.value))
     
@@ -96,7 +90,7 @@ const Home = () => {
     }
 
     return (
-        <div className="conteiner-homePage">
+        <div className={styles.conteiner_home}>
             {loading && <Loading/>}
             <div>
                 <Nav
@@ -105,18 +99,18 @@ const Home = () => {
                 />
             </div>
             
-            <section id='section-home'>
+            <section className={styles.section_home}>
                 <div>
-                    <select className='input' placeholder='Orden' onChange={handleOrder}>
-                        <option  >Order</option>
+                    <select className={styles.input} placeholder='Orden' onChange={handleOrder}>
+                        <option value="">Order</option>
                         <option value="Ascendente" >Ascendente</option>
                         <option value="Descendente">Descendente</option>
                     </select>
                 </div>
 
                 <div>
-                    <select className='input' placeholder='Orden' onChange={handleOrdertitle}>
-                        <option  >Select for name</option>
+                    <select className={styles.input} placeholder='Orden' onChange={handleOrdertitle}>
+                        <option value="">Select for name</option>
                         <option value="A-Z" >A-Z</option>
                         <option value="Z-A">Z-A</option>
                     </select>    
@@ -124,37 +118,40 @@ const Home = () => {
 
                
                <div>
-                    <select className='input' placeholder='Orden' onChange={handleOrderForStorage}>
-                        <option  >Filter for storage</option>
+                    <select className={styles.input} placeholder='Orden' onChange={handleOrderForStorage}>
+                        <option value="" >Filter for storage</option>
                         <option value="API" >API</option>
                         <option value="BASE DE DATOS">BASE DE DATOS</option>
                     </select>
                </div>
 
                <div>
-                    <select className='input' placeholder='Type Diet' onChange={handleFilterDiets}>
+                    <select className={styles.input} placeholder='Type Diet' onChange={handleFilterDiets}>
                             <option  value="diets">type of diets</option>
                             {typeDiet.map((diet)=>(
-                            <option  key= {diet.id} value={diet.name} >{diet.name}</option>
+
+                                <option key={diet.id} value={diet.name}>
+                                {diet.name}
+                            </option>
                             ))}
                     </select>
                </div>
 
                 <div>
-                    <select className='input' placeholder='Orden' onChange={handleOrderHealthScore}>
-                        <option  >Health Score</option>
+                    <select className={styles.input} placeholder='Orden' onChange={handleOrderHealthScore}>
+                        <option value="">Health Score</option>
                         <option value="Ascendente" >Ascendente</option>
                         <option value="Descendente">Descendente</option>
                     </select>
                 </div>
 
                 <div>
-                    <button className='input' onClick={resetAllRecipe}>Reset</button>
+                    <button className={styles.input} onClick={resetAllRecipe}>Reset</button>
                 </div>
             </section>
 
-            <div className="recipe">
-                {!loading && <Card recipesAll={cards}/>}
+            <div className={styles.recipe}>
+                {!loading && <Cards recipesAll={card}/>}
                 
             </div>
             <Paginado

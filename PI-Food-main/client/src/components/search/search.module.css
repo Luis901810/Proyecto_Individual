@@ -1,152 +1,42 @@
-.conteiner-homePage{
+.search_conteiner{
+   
     display: flex;
-   flex-direction: column;
-   width: 1500px;
+    justify-content: center;
+    border-radius: 15px 15px 15px 15px;
+    background:rgba(255, 255, 255, 0.656);
+    border: solid rgb(255, 255, 255);
+
+}
+
+.search_conteiner:hover{
+    background: #bdc1c271;
+
+}
+.buscarInput{
+    height: 35px;
+    width: 250px;
+    font-weight:bold;
+    border: 0;
+    border-radius: 15px 0 0 15px;
+    text-align: center;
+    background: transparent;
+    justify-content: left; 
+   
+}
+
+.buscarClick{
+    height: 30px;
+    font-weight:bold;
+    border: 0;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+    background:transparent;
+    margin-bottom: -20rem; 
+    justify-content: center;
+    align-items: center;
+    
  
 
-
 }
-.conteiner-homePage::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../../image/vista-elevada-verduras.avif');
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -1;
-  }
-
-.section-home{
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    justify-content:center;
-
-}
-
-
-.input{
-    width: 180px;
-    height: 30px;
-    border-radius:8px;
-    position: relative;
-    top: 10px;
-    left: 10px;
-    color: #060606;
-    background: transparent;
-    text-align: center;
-    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.99);
-    backdrop-filter: blur(15px);
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    border: solid grey;
-}
-
-.input:hover{
-    background: #100f0fa8;
-    text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.99);
-    color: white;
-    transform: scale(1.1);
-    border: solid rgba(255, 254, 254, 0.807);
-
-}
-
-
-
-/* CSS DE LA HOME CARD */
-
-.conteiner-car{
-
-
-    /* display:flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow:visible; */
-
-
-
-
-
-    justify-content: space-around;
-    padding: 1rem;
-    border-radius: 1rem;
-    gap: 2rem;
-    margin: 2rem;
-      display:grid;
-      grid-template-columns: repeat(5, 1fr);
-  
-      grid-column-gap: 1rem;
-      grid-row-gap: 2rem;
-      justify-items: center;
-    
-
-}
-
-
-.car-detail{
-    width: 230px;
-    height: 450px;
-    border-radius: 18px;
-    overflow: hidden;
-    margin: 50px 10px 50px; 
-    flex-wrap: nowrap;
-    transition: 0.3s;
-    box-shadow: 5px 5px 15px 5px #989292cf;
-    background: url('../../image/fondo-card.jpg');
-    gap: 5px;
-    color:rgba(17, 16, 16, 0.895);
-    text-shadow: 2px 3px 4px rgba(220, 237, 232, 0.99);
-    
-    
-}
-
-.title-card{
-    font-size: 18px;
-
-}
-.diet-title-card{
-    font-size: 15px;
-
-}
-
-.diet-card{
-    font-size: 12px;
-    text-align:left;
-    margin: 40px;
-}
-
-.image-card{
-    width: 200px;
-    height: 350px;
-    height: 40%;
-    transition: 0.3s;
-    border-radius: 50px;
-    position: relative;
-    top: 15px;
-
-}
-
-.image-card:hover{
-    transform: scale(1.05);
-    background: #f5f1f0;
-    box-shadow: 0 0 10px #f6f7f7, 0 0 40px #fafdfd;
-    cursor: pointer;
-        
-}
-
-.diet-title-card{
-
-    position: relative;
-    top: 25px;
-
-}
-
-.diet-card{
-
-    position: relative;
-    top: 0px;
-}
+.buscarClick:hover{
+    transform: rotateY(10deg)}

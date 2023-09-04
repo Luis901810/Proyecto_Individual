@@ -1,0 +1,247 @@
+.conteiner_form{
+    margin: 0px;
+
+    background: url('../../image/recetas-fondo.avif') no-repeat;
+    background-size: cover;
+    justify-content:space-evenly;
+    height: 100vh;
+    flex-wrap: wrap;
+    display: flex;
+
+}
+/* ------------   SECTION  ------------ */
+.section1{
+    width: 1500px;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  
+}
+.section2{
+    width: 1500px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  
+}
+
+/* ------------   SECTION 1  ------------ */
+.logo{
+    height:80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.title_form{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 1px;
+    color:chocolate;
+    -webkit-text-stroke: 0.5px rgb(255, 255, 255);
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.581);
+    font-size: 40px;
+}
+
+.btn_home_form{
+    width: 70px;
+    height: 70px;
+    border-radius:20px;
+    color: #060606;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  
+ 
+}
+.btn_home_form:hover{
+    background: #ffffffa8;
+    transform: scale(1.1);
+    border: solid rgba(255, 254, 254, 0.807);
+    box-shadow: 0 0 10px #2a2c2c9b, 0 0 10px #2a2c2c9b, 0 0 10px #2a2c2c9b;
+}
+
+/* ------------   SECTION 2  ------------ */
+
+.sectionA{
+    width: 410px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-around;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    padding: 5px;
+    border-radius: 30px;
+}
+
+.sectionB{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-around;
+    width: 410px;
+    height: 600px;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    padding: 4px;
+    border-radius: 30px;
+}
+.sectionC{
+    width: 410px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 30px;
+    gap:90px;
+
+
+}
+
+.title_form{
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 25px;
+        color: rgb(195, 101, 13);  
+}
+
+/* ------------   SECTION A  ------------ */
+.cuadro_texto{
+    height: 250px;
+    width: 350px;
+    font-weight:bold;
+    border-radius: 15px;
+    text-align: center;
+    background:transparent;
+    justify-content:space-evenly; 
+    text-align:justify;
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.99);
+    backdrop-filter: blur(15px);
+    border: solid rgb(0, 0, 0);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.91);
+}
+
+
+.input_form{
+    width: 350px;
+    height: 30px;
+    border-radius:8px;
+    color: #ffffff;
+    text-align:center;
+    color: #060606;
+    background: transparent;
+
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.99);
+    backdrop-filter: blur(15px);
+    font-weight: bold;
+    transition: 0.3s;
+    border: solid rgb(0, 0, 0);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.91);
+}
+.score_form{
+    border: transparent;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.91);
+}
+.slider{
+    width: 320px;
+
+}
+
+/* ------------   SECTION B  ------------ */
+.scroll_diets{
+    border: solid;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+    border: transparent;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.91);
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.99);
+    padding: 3px;
+}
+.box_diets_list{
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+    color: rgba(16, 16, 16, 0.918);
+    font-family: cursive;
+    font-weight: bold;
+}
+
+
+
+
+/* ------------   SECTION C  ------------ */
+
+
+.box{
+    position: relative;
+    top: -30px;
+    border: solid;
+    height: 300px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  
+    border-radius: 15px;
+   
+    background:transparent;
+ 
+ 
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.99);
+    backdrop-filter: blur(15px);
+   
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.91);
+
+}
+
+.new_img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    width: 300px;
+    height: 300px;
+}
+
+.btn_submit_form{
+    position: relative;
+    top: -50px;
+    width: 150px;
+    height: 30px;
+    border-radius:8px;
+    color: #ffffff;
+    text-align: center;
+    color: #060606;
+    background: transparent;
+    text-align: center;
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.99);
+    backdrop-filter: blur(15px);
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    border: solid rgb(1, 1, 1);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.91);
+}
+.btn_submit_form:hover{
+    background: #20212070;
+    text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.99);
+    transform: scale(1.1);
+    color: white;
+    border: solid rgba(255, 254, 254, 0.807);
+    box-shadow: 2px 2px 2px 2px rgba(113, 83, 83, 0.91);
+
+}
+
