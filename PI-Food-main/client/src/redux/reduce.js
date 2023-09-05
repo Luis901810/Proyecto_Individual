@@ -38,11 +38,15 @@ const reducer = (state = initialState, action) => {
             
 
         case RECIPE_ID:
+            const { recipeId } = action.payload;
+        
             return {
                  ...state,
                  recipeDetail: action.payload,
+                 recipeId,
                  loading: false 
                 };
+                
 
         case RESET_RECIPE_ID:
             return { ...state, recipeDetail: {} };

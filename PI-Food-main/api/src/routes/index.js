@@ -11,14 +11,13 @@ const deleteRecipe = require("../controllers/deleteRecipe");
 const getRecipes = require("../controllers/getRecipes");
 // Configurar los routers
 
-
+router.get("/recipes/name", getRecipeName);
 router.post("/createrecipes", postCreateRecipe)
 router.get("/recipes", getRecipes)
 router.get("/diets" , getTypeDiets)
 
 
 router.get("/recipes/:id", getRecipesById);
-router.get("/recipes/name", getRecipeName);
 router.put("/recipes/:id", putRecipeUpdate)
 router.delete("/recipes/:id", deleteRecipe)
 

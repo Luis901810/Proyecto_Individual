@@ -11,19 +11,12 @@ import styles from "./detail.module.css"
 const DetailRecipe =()=>{
 
     const navigate = useNavigate()
-
     const { id } = useParams();
     console.log( "id de from ese param: ", id )
-
     const dispatch = useDispatch();
-
     const loading = useSelector(state => state.loading)
-
-     
     const detailRecipe = useSelector(state => state.recipeDetail);
 
-   
-    
     //-----------   cargamos el detail   -----------//
     useEffect(()=>{
         if(!id){
@@ -34,10 +27,6 @@ const DetailRecipe =()=>{
         return () => dispatch(resetRecipeId())
     },[dispatch, id, navigate]);
     
-  
-    
-    
-
     return(
 
             <div  className={styles.conteiner_detailRecipe}>
@@ -54,7 +43,7 @@ const DetailRecipe =()=>{
 
                 <section className={styles.section2_detail}>
                     <section className={styles.sectionA_detail}>
-                        <img className={styles.img_detail} src={detailRecipe?.image} alt={detailRecipe?.nombre}/>
+                        <img className={styles.img_detail} src={detailRecipe?.image} alt={detailRecipe?.title}/>
                         <div className={styles.score_diets}>
                             <div className={styles.score}>
                                 <h3 className={styles.title}>HEALTH SCORE</h3>

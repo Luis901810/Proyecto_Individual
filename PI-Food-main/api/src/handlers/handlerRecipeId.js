@@ -2,6 +2,7 @@ const axios = require('axios');
 require('dotenv').config();
 const { YOUR_API_KEY, URLAPI } = process.env;
 const { Recipe, Diets } = require("../db");
+const uuidValidate = require("uuid-validate")
 
 const extractRecipeData = (data) => {
     const instructions = data.analyzedInstructions[0]?.steps.map(ele => ele.step) || [];
@@ -23,7 +24,7 @@ const extractRecipeData = (data) => {
 
 const dataApiDB = async (id) => {
     try {
-        if (id) {
+        if (uuidValidate(id)){
             const response = await Recipe.findByPk(id, {
                
                 include: {
@@ -35,18 +36,13 @@ const dataApiDB = async (id) => {
             if (response?.dataValues?.title) {
                 
                 return extractRecipeData(response.dataValues);
-                }
-            // } else {
-                
-            //     throw new Error("La receta no se encontró en la base de datos.");
-            // }
-           
+                }  
         } 
     
 
 
         const responseApi = await axios(`${URLAPI}/${id}/information?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=10`);
-          console.log(responseApi)
+         
             const responseApiData = responseApi?.data;
 
             if (responseApiData?.title) {

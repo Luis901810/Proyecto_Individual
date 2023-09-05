@@ -1,13 +1,11 @@
 
 
-const { Recipe } = require("../db");
+const { Recipe, Diets } = require("../db");
 
 
 const newData = async({ title, image, summary, healthScore,instructions,dietId}) =>{
+        const stringInstructions = Array.isArray(instructions) ? instructions.join('') : String(instructions);
 
-   
-        const stringInstructions = Array.isArray(instructions) ? instructions.join('\n') : String(instructions);
-    
     try {
         if (instructions !== undefined && typeof instructions !== 'string' && stringInstructions.trim() !== '') {
             throw new Error("Las instrucciones deben ser una cadena de texto o estar vacías");

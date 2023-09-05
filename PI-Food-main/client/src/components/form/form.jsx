@@ -1,16 +1,16 @@
 import { useEffect,useState } from 'react'
 import { useDispatch,useSelector } from "react-redux";
-import { addTypeRecipe, createRecipe, recipeAll } from '../../redux/action';
+import { addTypeRecipe, createRecipe, recipesAll } from '../../redux/action';
 import { useNavigate } from 'react-router-dom'
 import logo from '../../image/logo-detail.jpg'
 import imageDefault from '../../image/cooking.png'
 import styles from "./form.module.css"
-
+import {validateTitle, validateSummary, validateHealthScore, validateInstructions,
+            validateImage, validateDietId} from "../validations/validations"
 
 const Form = ()=>{
     
     const navigate = useNavigate()
-
     const dispatch = useDispatch()
 
     //----------- cargamos la lista de dietas -----------//
@@ -38,29 +38,26 @@ const Form = ()=>{
 
     //----------- Seleccionamos las dietas -----------//
     
-        //const [typeDiet,setTypeDiet]=useState([])
 
-        const addDiet = (id) => {
-            const updatedDietIds = input.dietId.includes(id)
-                ? input.dietId.filter((ele) => ele !== id)
-                : [...input.dietId, id];
+    const addDiet = (id) => {
+    const updatedDietIds = input.dietId.includes(id)
+        ? input.dietId.filter((ele) => ele !== id)
+        : [...input.dietId, id];
         
-            setInput({ ...input, dietId: updatedDietIds });
-        };
- 
-    //----------- Agrego las dietas al input -----------//
-    //   input.dietId=typeDiet
+        setInput({ ...input, dietId: updatedDietIds });
+    };
 
     //----------- Validamos las propiedades -----------//
     const changeHandle = (event)=>{
 
-
-       setInput({...input,[event.target.name]:event.target.value})
-        setError(validation({...input,[event.target.name]:event.target.value}))
+        setInput({
+            ...input,
+            [event.target.name]:event.target.value})
+        setError(validation({
+            ...input,
+            [event.target.name]:event.target.value}))
     }
-    console.log(input)
-
-
+    
     //----------- Función de validacón -----------//
     const [error,setError] = useState({
         title:"",
@@ -72,75 +69,26 @@ const Form = ()=>{
     })
 
     const validation = (input)=>{
-        const inputError = {}
+    const inputError = {}
         
-        //............title............//
-        if (input.title.length === 0){
-            inputError.title="Debe tener un título"
-            }
-        else if (input.title.length > 32){
-              inputError.title="El título es demasiado largo"
-              }
-        else{
-            inputError.title=""
-        }
-
-        // ............summary............//
-        if (!input.summary || input.summary.trim().length < 20) {
-            inputError.summary = "El resumen del plato es demasiado corto";
-        } else {
-            inputError.summary = "";
-        }
-        
-        //............healthScore............//
-        if (parseInt(input.healthScore) === 0){
-              inputError.healthScore="No se añadió el health Score"
-              }
-        else{
-              inputError.healthScore=""
-        }
-
-           //............instructions............//
-        if (input.instructions.length < 20){
-            inputError.instructions="Las instrucciones del plato es demasiada corta"
-            }
-        else{
-            inputError.instructions=""
-        }
-
-         //............image............//
-         if(input.image.length === 0){
-            inputError.image="Debes cargar una imagen"
-
-         }
-         else if (input.image.includes("jpg","jpeg","png","data:image/jpeg;base64,")){
-            inputError.image=""
-            }
-
-        else if (input.image.includes("data:image/jpeg;base64,")){
-                inputError.image=""
-            }
-        else{
-             inputError.image='El formato de la imagen debe ser "jpg","jpeg","png"' 
      
-        }
+  inputError.title = validateTitle(input.title);
+  inputError.summary = validateSummary(input.summary);
+  inputError.healthScore = validateHealthScore(input.healthScore);
+  inputError.instructions = validateInstructions(input.instructions);
+  inputError.image = validateImage(input.image);
+  inputError.dietId = validateDietId(input.dietId);
 
-                //.........tipos de dietas.........//
-        if(input.dietId.length === 0){
-            error.dietId="Selecciona por lo menos un tipo de dieta"
-
-        }
-        else{
-            error.dietId=""
-        }
-        
-        return inputError
-  }
+  return inputError;
+};
+      
 
         //.........tipos de dietas.........//
-         input.dietId.length === 0?error.dietId="Selecciona por lo menos un tipo de dieta" :error.dietId=""
+    input.dietId.length === 0
+    ?error.dietId="Selecciona por lo menos un tipo de dieta" 
+    :error.dietId=""
   
-    //------------------------ Fin de validacion---------------------------//
+
 
     //----------- Función de validacón -----------//
 
@@ -148,7 +96,7 @@ const Form = ()=>{
         
         event.preventDefault();
 
-         const dato = Object.values(error) 
+        const dato = Object.values(error) 
 
          if (dato.some((error) => error !== "")) { 
            setError(error);
@@ -185,7 +133,7 @@ const Form = ()=>{
 
     const returToHome=()=>{
         navigate("/home")
-        dispatch(recipeAll())
+        dispatch(recipesAll())
 
     }
 

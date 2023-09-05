@@ -2,6 +2,7 @@ const axios = require('axios');
 require('dotenv').config();
 const { YOUR_API_KEY, URLAPI } = process.env;
 const { Recipe, Diets } = require("../db");
+const { v4: uuidv4 } = require('uuid');
 
 const recipesApi = async () => {
     try
@@ -15,7 +16,7 @@ const recipesApi = async () => {
             let response = await results?.map((result) => {
                 return {
                     
-                    idApi: result.id, 
+                    id:result.id, 
                     title: result.title,
                     image: result.image, 
                     vegetarian: result.vegetarian,

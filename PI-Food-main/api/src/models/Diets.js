@@ -7,14 +7,13 @@ module.exports = (sequelize) =>{
            
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
-            primaryKey: true,
+            primaryKey: true
            
            
         },
        name:{
-            type :DataTypes.STRING,
+            type :DataTypes.ENUM("vegetarian","gluten free","dairy free","lacto ovo vegetarian","vegan","paleolithic","primal","whole 30","pescatarian","ketogenic","fodmap friendly"),
             allownulls:false,
-            unique: true,
             set(value){
                 this.setDataValue("name", value.toLowerCase())
             }

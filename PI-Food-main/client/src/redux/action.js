@@ -5,35 +5,34 @@ import { GET_RECIPE_ALL, GET_RECIPE_NAME,
          UPWARD_OR_FALLING_TITLE,FILTER_FOR_DIET, FILTER_HEALTH_SCORE, 
          FILTER_FOR_STORAGE, LOADING } from "./actions_types";
 
-const URLNAME= "http://localhost:3001/recipes?name";
-const URLDIET = "http://localhost:3001/diets"
-const URLCREATE = "http://localhost:3001/createrecipes"
-const URL= "http://localhost:3001/recipes";
+const URLNAME="http://localhost:3001/recipes?name";
+const URLDIET ="http://localhost:3001/diets";
+const URLCREATE ="http://localhost:3001/createrecipes";
+const URL="http://localhost:3001/recipes";
 
 
+            // todos los recipes 
+export const recipesAll = () =>{
+    return async function(dispatch){
 
-   
-
-                    // todos los recipes     
-
-export const recipeAll = () =>{
-            return async function(dispatch){
-                try {
-                    dispatch(loading(true))
-                    const response = await axios(`${URL}`)
-                    
-                    return dispatch({
-                        type: GET_RECIPE_ALL,
-                        payload: response.data
-                    })
-                    
-                } catch (error) {
-                    throw new Error(`Error al cargar las Recetas: ${error.message}`)
-                 }finally{
-                    dispatch(loading(false))
-                }
+        try {
+            dispatch(loading(true))
+             const response = await axios(`${URL}`)
+                                
+            return dispatch({
+                type: GET_RECIPE_ALL,
+                payload: response.data
+            })
+                                
+        } catch (error) {
+            throw new Error(`Error al cargar las Recetas: ${error.message}`)
+             }finally{
+                dispatch(loading(false))
             }
-         }
+    }
+}    
+
+
          // recipes por nombre
 
 export const recipeName = (name) =>{
@@ -54,28 +53,6 @@ export const recipeName = (name) =>{
              dispatch(loading(false))
         }
 
-    }
-}
-
-        //recetas por ID
-
-export const recipeId = (id) =>{
-    return   async function(dispatch){
-        try {
-           dispatch(loading(true))
-            let response =  await axios(`${URL}/${id}`)
-
-            return dispatch({
-                type: RECIPE_ID,
-                payload :response.data
-            })
-
-        } catch (error) {
-            throw new Error(`error al buscar recetas por ID: ${error.message}`)
-         
-        }finally{
-            dispatch(loading(false))
-        }
     }
 }
 
@@ -171,4 +148,25 @@ export const loading=(stateLoading)=>{
         type:LOADING,
         payload:stateLoading}
 
+}
+export const recipeId = (id) =>{
+    return   async function(dispatch){
+        try {
+           dispatch(loading(true))
+            const response =  await axios.get(`${URL}/${id}`)
+
+            return dispatch({
+                type: RECIPE_ID,
+                payload :response.data
+                
+            })
+            
+
+        } catch (error) {
+            throw new Error(`error al buscar recetas por ID: ${error.message}`)
+         
+        }finally{
+            dispatch(loading(false))
+        }
+    }
 }
